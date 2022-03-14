@@ -1,0 +1,52 @@
+body {
+  align-items: center;
+  background-color: #333;
+  display: flex;
+  font-family: "Arial";
+  font-size: 7.5vmin;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+}
+
+#board {
+  background-color: #ccc;
+  border-radius: 1vmin;
+  display: grid;
+  gap: var(--cell-gap);
+  grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+  grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+  padding: 2vmin;
+  position: relative;
+}
+
+.cell {
+  background-color: #aaa;
+  border-radius: 1vmin;
+}
+
+.tile {
+  --background-ligtness: 80%;
+  --text-ligtness: 20%;
+
+  align-items: center;
+  animation: show 200ms ease-in-out;
+  background-color: hsl(200, 50%, var(--background-ligtness));
+  border-radius: 1vmin;
+  color: hsl(200, 25%, var(--text-ligtness));
+  display: flex;
+  font-weight: bold;
+  height: var(--cell-size);
+  justify-content: center;
+  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  position: absolute;
+  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+  width: var(--cell-size);
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}
