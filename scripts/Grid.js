@@ -63,6 +63,10 @@ export default class Grid {
     this.#tiles = createInitialTiles(getInitialTilesPosition());
   }
 
+  setTiles(tiles) {
+    this.#tiles = tiles;
+  }
+
   getTiles() {
     return this.#tiles;
   }
