@@ -35,7 +35,13 @@ document.addEventListener("keyup", (e) => {
         !Grid.movementsAvaibleY(grid.tiles)
       ) {
         alert("loose");
+        newGame();
       }
+    }
+
+    if (grid.score === 2048) {
+      alert("win");
+      newGame();
     }
   }
 });
