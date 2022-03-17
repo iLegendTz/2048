@@ -26,14 +26,11 @@ document.addEventListener("keyup", (e) => {
     e.code === "ArrowRight" ||
     e.code === "ArrowDown"
   ) {
-    grid.setTiles(Tile.setPosition(e.key, grid.getTiles()));
-    if (grid.getTiles().length < GRID_SIZE * GRID_SIZE) {
-      createRandomTile(grid.getTiles());
-    } else if (grid.getTiles().length === GRID_SIZE * GRID_SIZE) {
-      if (
-        !movementsAvaibleX(grid.getTiles()) &&
-        !movementsAvaibleY(grid.getTiles())
-      ) {
+    grid.tiles = Tile.setPosition(e.key, grid.tiles);
+    if (grid.tiles.length < GRID_SIZE * GRID_SIZE) {
+      createRandomTile(grid.tiles);
+    } else if (grid.tiles.length === GRID_SIZE * GRID_SIZE) {
+      if (!movementsAvaibleX(grid.tiles) && !movementsAvaibleY(grid.tiles)) {
         alert("loose");
       }
     }
@@ -42,14 +39,14 @@ document.addEventListener("keyup", (e) => {
 
 const movementsAvaibleX = (tiles) => {
   for (let i = 1; i < GRID_SIZE; i++) {
-    const tilesAux = tiles.filter((tile) => tile.getXPosition() === i);
+    const tilesAux = tiles.filter((tile) => tile.xPosition === i);
     for (let j = 0; j < tilesAux.length; j++) {
       const findX = tiles.find(
         (t) =>
-          t.getXPosition() === tilesAux[j].getXPosition() - 1 &&
-          t.getYPosition() === tilesAux[j].getYPosition()
+          t.xPosition === tilesAux[j].xPosition - 1 &&
+          t.yPosition === tilesAux[j].yPosition
       );
-      if (findX.getValue() === tilesAux[j].getValue()) {
+      if (findX.value === tilesAux[j].value) {
         return true;
       }
     }
@@ -59,14 +56,14 @@ const movementsAvaibleX = (tiles) => {
 
 const movementsAvaibleY = (tiles) => {
   for (let i = 1; i < GRID_SIZE; i++) {
-    const tilesAux = tiles.filter((tile) => tile.getYPosition() === i);
+    const tilesAux = tiles.filter((tile) => tile.yPosition === i);
     for (let j = 0; j < tilesAux.length; j++) {
       const findY = tiles.find(
         (t) =>
-          t.getXPosition() === tilesAux[j].getXPosition() &&
-          t.getYPosition() === tilesAux[j].getYPosition() - 1
+          t.xPosition === tilesAux[j].xPosition &&
+          t.yPosition === tilesAux[j].yPosition - 1
       );
-      if (findY.getValue() === tilesAux[j].getValue()) {
+      if (findY.value === tilesAux[j].value) {
         return true;
       }
     }

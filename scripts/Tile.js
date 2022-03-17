@@ -20,12 +20,12 @@ export default class Tile {
 
   static setPosition(keyCode, tiles) {
     const sameTile = (tile1, tile2) => {
-      tile1.getTileElement().innerHTML = tile1.getValue() * 2;
-      tile1.setValue(tile1.getValue() * 2);
-      tile2.getTileElement().remove();
+      tile1.tileElement.innerHTML = tile1.value * 2;
+      tile1.value = tile1.value * 2;
+      tile2.tileElement.remove();
       tiles.splice(tiles.indexOf(tile2), 1);
 
-      grid.score += tile1.getValue();
+      grid.score += tile1.value;
       document.getElementById("score").innerHTML = "Puntuacion: " + grid.score;
     };
 
@@ -33,25 +33,23 @@ export default class Tile {
       case "ArrowUp":
         for (let i = 1; i < GRID_SIZE; i++) {
           tiles
-            .filter((tile) => tile.getYPosition() === i)
+            .filter((tile) => tile.yPosition === i)
             .map((tile) => {
               const find = tiles.find(
                 (t) =>
-                  t.getXPosition() === tile.getXPosition() &&
-                  t.getYPosition() === tile.getYPosition() - 1
+                  t.xPosition === tile.xPosition &&
+                  t.yPosition === tile.yPosition - 1
               );
 
-              if (find == undefined && tile.getYPosition() > 0) {
-                tile.setYPosition(tile.getYPosition() - 1);
-                tile
-                  .getTileElement()
-                  .style.setProperty("--y", tile.getYPosition());
+              if (find == undefined && tile.yPosition > 0) {
+                tile.yPosition = tile.yPosition - 1;
+                tile.tileElement.style.setProperty("--y", tile.yPosition);
                 Tile.setPosition(keyCode, tiles);
                 return tiles;
               }
 
               if (find !== undefined) {
-                if (find.getValue() === tile.getValue()) {
+                if (find.value === tile.value) {
                   sameTile(find, tile);
                 }
               }
@@ -63,24 +61,22 @@ export default class Tile {
       case "ArrowDown":
         for (let i = GRID_SIZE - 2; i >= 0; i--) {
           tiles
-            .filter((tile) => tile.getYPosition() === i)
+            .filter((tile) => tile.yPosition === i)
             .map((tile) => {
               const find = tiles.find(
                 (t) =>
-                  t.getXPosition() === tile.getXPosition() &&
-                  t.getYPosition() === tile.getYPosition() + 1
+                  t.xPosition === tile.xPosition &&
+                  t.yPosition === tile.yPosition + 1
               );
-              if (find == undefined && tile.getYPosition() < GRID_SIZE - 1) {
-                tile.setYPosition(tile.getYPosition() + 1);
-                tile
-                  .getTileElement()
-                  .style.setProperty("--y", tile.getYPosition());
+              if (find == undefined && tile.yPosition < GRID_SIZE - 1) {
+                tile.yPosition = tile.yPosition + 1;
+                tile.tileElement.style.setProperty("--y", tile.yPosition);
                 Tile.setPosition(keyCode, tiles);
                 return tiles;
               }
 
               if (find !== undefined) {
-                if (find.getValue() === tile.getValue()) {
+                if (find.value === tile.value) {
                   sameTile(find, tile);
                 }
               }
@@ -92,24 +88,22 @@ export default class Tile {
       case "ArrowRight":
         for (let i = GRID_SIZE - 2; i >= 0; i--) {
           tiles
-            .filter((tile) => tile.getXPosition() === i)
+            .filter((tile) => tile.xPosition === i)
             .map((tile) => {
               const find = tiles.find(
                 (t) =>
-                  t.getXPosition() === tile.getXPosition() + 1 &&
-                  t.getYPosition() === tile.getYPosition()
+                  t.xPosition === tile.xPosition + 1 &&
+                  t.yPosition === tile.yPosition
               );
-              if (find == undefined && tile.getXPosition() < GRID_SIZE - 1) {
-                tile.setXPosition(tile.getXPosition() + 1);
-                tile
-                  .getTileElement()
-                  .style.setProperty("--x", tile.getXPosition());
+              if (find == undefined && tile.xPosition < GRID_SIZE - 1) {
+                tile.xPosition = tile.xPosition + 1;
+                tile.tileElement.style.setProperty("--x", tile.xPosition);
                 Tile.setPosition(keyCode, tiles);
                 return tiles;
               }
 
               if (find !== undefined) {
-                if (find.getValue() === tile.getValue()) {
+                if (find.value === tile.value) {
                   sameTile(find, tile);
                 }
               }
@@ -121,25 +115,23 @@ export default class Tile {
       case "ArrowLeft":
         for (let i = 1; i < GRID_SIZE; i++) {
           tiles
-            .filter((tile) => tile.getXPosition() === i)
+            .filter((tile) => tile.xPosition === i)
             .map((tile) => {
               const find = tiles.find(
                 (t) =>
-                  t.getXPosition() === tile.getXPosition() - 1 &&
-                  t.getYPosition() === tile.getYPosition()
+                  t.xPosition === tile.xPosition - 1 &&
+                  t.yPosition === tile.yPosition
               );
 
-              if (find == undefined && tile.getXPosition() > 0) {
-                tile.setXPosition(tile.getXPosition() - 1);
-                tile
-                  .getTileElement()
-                  .style.setProperty("--x", tile.getXPosition());
+              if (find == undefined && tile.xPosition > 0) {
+                tile.xPosition = tile.xPosition - 1;
+                tile.tileElement.style.setProperty("--x", tile.xPosition);
                 Tile.setPosition(keyCode, tiles);
                 return tiles;
               }
 
               if (find !== undefined) {
-                if (find.getValue() === tile.getValue()) {
+                if (find.value === tile.value) {
                   sameTile(find, tile);
                 }
               }
@@ -153,31 +145,31 @@ export default class Tile {
     }
   }
 
-  getTileElement() {
+  get tileElement() {
     return this.#tileElement;
   }
 
-  setXPosition(x) {
+  set xPosition(x) {
     this.#x = x;
   }
 
-  getXPosition() {
+  get xPosition() {
     return this.#x;
   }
 
-  setYPosition(y) {
+  set yPosition(y) {
     this.#y = y;
   }
 
-  getYPosition() {
+  get yPosition() {
     return this.#y;
   }
 
-  setValue(value) {
+  set value(value) {
     this.#value = value;
   }
 
-  getValue() {
+  get value() {
     return this.#value;
   }
 }
@@ -197,7 +189,7 @@ export const createRandomTile = (tiles) => {
 
   do {
     tileExists = tiles.find(
-      (t) => t.getXPosition() === newX && t.getYPosition() === newY
+      (t) => t.xPosition === newX && t.yPosition === newY
     );
     if (tileExists === undefined) {
       tiles.push(new Tile(createTileElement(boardElement), newX, newY, 2));
