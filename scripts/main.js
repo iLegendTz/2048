@@ -30,43 +30,12 @@ document.addEventListener("keyup", (e) => {
     if (grid.tiles.length < GRID_SIZE * GRID_SIZE) {
       createRandomTile(grid.tiles);
     } else if (grid.tiles.length === GRID_SIZE * GRID_SIZE) {
-      if (!movementsAvaibleX(grid.tiles) && !movementsAvaibleY(grid.tiles)) {
+      if (
+        !Grid.movementsAvaibleX(grid.tiles) &&
+        !Grid.movementsAvaibleY(grid.tiles)
+      ) {
         alert("loose");
       }
     }
   }
 });
-
-const movementsAvaibleX = (tiles) => {
-  for (let i = 1; i < GRID_SIZE; i++) {
-    const tilesAux = tiles.filter((tile) => tile.xPosition === i);
-    for (let j = 0; j < tilesAux.length; j++) {
-      const findX = tiles.find(
-        (t) =>
-          t.xPosition === tilesAux[j].xPosition - 1 &&
-          t.yPosition === tilesAux[j].yPosition
-      );
-      if (findX.value === tilesAux[j].value) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
-
-const movementsAvaibleY = (tiles) => {
-  for (let i = 1; i < GRID_SIZE; i++) {
-    const tilesAux = tiles.filter((tile) => tile.yPosition === i);
-    for (let j = 0; j < tilesAux.length; j++) {
-      const findY = tiles.find(
-        (t) =>
-          t.xPosition === tilesAux[j].xPosition &&
-          t.yPosition === tilesAux[j].yPosition - 1
-      );
-      if (findY.value === tilesAux[j].value) {
-        return true;
-      }
-    }
-  }
-  return false;
-};

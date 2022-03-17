@@ -80,4 +80,38 @@ export default class Grid {
   get score() {
     return this.#score;
   }
+
+  static movementsAvaibleX = (tiles) => {
+    for (let i = 1; i < GRID_SIZE; i++) {
+      const tilesAux = tiles.filter((tile) => tile.xPosition === i);
+      for (let j = 0; j < tilesAux.length; j++) {
+        const findX = tiles.find(
+          (t) =>
+            t.xPosition === tilesAux[j].xPosition - 1 &&
+            t.yPosition === tilesAux[j].yPosition
+        );
+        if (findX.value === tilesAux[j].value) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  static movementsAvaibleY = (tiles) => {
+    for (let i = 1; i < GRID_SIZE; i++) {
+      const tilesAux = tiles.filter((tile) => tile.yPosition === i);
+      for (let j = 0; j < tilesAux.length; j++) {
+        const findY = tiles.find(
+          (t) =>
+            t.xPosition === tilesAux[j].xPosition &&
+            t.yPosition === tilesAux[j].yPosition - 1
+        );
+        if (findY.value === tilesAux[j].value) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 }
