@@ -1,5 +1,5 @@
 import { GRID_SIZE } from "./Grid.js";
-import { boardElement } from "./main.js";
+import { boardElement, grid } from "./main.js";
 
 export default class Tile {
   #tileElement;
@@ -19,6 +19,16 @@ export default class Tile {
   }
 
   static setPosition(keyCode, tiles) {
+    const sameTile = (tile1, tile2) => {
+      tile1.getTileElement().innerHTML = tile1.getValue() * 2;
+      tile1.setValue(tile1.getValue() * 2);
+      tile2.getTileElement().remove();
+      tiles.splice(tiles.indexOf(tile2), 1);
+
+      grid.score += tile1.getValue();
+      document.getElementById("score").innerHTML = "Puntuacion: " + grid.score;
+    };
+
     switch (keyCode) {
       case "ArrowUp":
         for (let i = 1; i < GRID_SIZE; i++) {
@@ -42,10 +52,7 @@ export default class Tile {
 
               if (find !== undefined) {
                 if (find.getValue() === tile.getValue()) {
-                  find.getTileElement().innerHTML = find.getValue() * 2;
-                  find.setValue(find.getValue() * 2);
-                  tile.getTileElement().remove();
-                  tiles.splice(tiles.indexOf(tile), 1);
+                  sameTile(find, tile);
                 }
               }
             });
@@ -74,10 +81,7 @@ export default class Tile {
 
               if (find !== undefined) {
                 if (find.getValue() === tile.getValue()) {
-                  find.getTileElement().innerHTML = find.getValue() * 2;
-                  find.setValue(find.getValue() * 2);
-                  tile.getTileElement().remove();
-                  tiles.splice(tiles.indexOf(tile), 1);
+                  sameTile(find, tile);
                 }
               }
             });
@@ -106,10 +110,7 @@ export default class Tile {
 
               if (find !== undefined) {
                 if (find.getValue() === tile.getValue()) {
-                  find.getTileElement().innerHTML = find.getValue() * 2;
-                  find.setValue(find.getValue() * 2);
-                  tile.getTileElement().remove();
-                  tiles.splice(tiles.indexOf(tile), 1);
+                  sameTile(find, tile);
                 }
               }
             });
@@ -139,10 +140,7 @@ export default class Tile {
 
               if (find !== undefined) {
                 if (find.getValue() === tile.getValue()) {
-                  find.getTileElement().innerHTML = find.getValue() * 2;
-                  find.setValue(find.getValue() * 2);
-                  tile.getTileElement().remove();
-                  tiles.splice(tiles.indexOf(tile), 1);
+                  sameTile(find, tile);
                 }
               }
             });

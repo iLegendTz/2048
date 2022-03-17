@@ -2,8 +2,22 @@ import Grid, { GRID_SIZE } from "./Grid.js";
 import Tile, { createRandomTile } from "./Tile.js";
 
 export const boardElement = document.getElementById("board");
+const scoreElement = document.getElementById("score");
 
-let grid = new Grid(boardElement);
+export let grid = new Grid(boardElement);
+
+const newGame = () => {
+  while (boardElement.firstChild) {
+    boardElement.removeChild(boardElement.lastChild);
+  }
+
+  grid = new Grid(boardElement);
+  scoreElement.innerHTML = "Puntuacion: " + grid.score;
+};
+
+document
+  .getElementById("btn-new-game")
+  .addEventListener("click", () => newGame());
 
 document.addEventListener("keyup", (e) => {
   if (

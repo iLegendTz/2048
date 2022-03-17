@@ -10,8 +10,10 @@ const INITIAL_TILES_NUMBER = 2;
 export default class Grid {
   #cells;
   #tiles;
+  #score;
 
   constructor(boardElement) {
+    this.#score = 0;
     boardElement.style.setProperty("--grid-size", GRID_SIZE);
     boardElement.style.setProperty("--cell-size", `${CELL_SIZE}vmin`);
     boardElement.style.setProperty("--cell-gap", `${CELL_GAP}vmin`);
@@ -69,5 +71,13 @@ export default class Grid {
 
   getTiles() {
     return this.#tiles;
+  }
+
+  set score(score) {
+    this.#score = score;
+  }
+
+  get score() {
+    return this.#score;
   }
 }

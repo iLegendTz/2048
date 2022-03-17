@@ -6,7 +6,13 @@ body {
   font-size: 7.5vmin;
   justify-content: center;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #board {
@@ -49,4 +55,22 @@ body {
     opacity: 0.5;
     transform: scale(0);
   }
+}
+
+#match-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+#score {
+  color: white;
+  font-size: 2.5vmin;
+  margin: 0;
+  padding: 0;
+}
+
+#btn-new-game {
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 2.5vmin;
 }
